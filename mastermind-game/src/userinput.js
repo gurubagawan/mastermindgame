@@ -4,6 +4,10 @@ import './App.css';
 
 class Userinput extends Component {
   render() {
+for (let i=0; i<4; i++){
+<button className="btn white btn-circle"
+onClick={() => { this.props.setcolour(this.props.colour) }} />
+}
     return (
       <div className="App">
         <div className="App-header">

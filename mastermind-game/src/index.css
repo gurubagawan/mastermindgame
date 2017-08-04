@@ -3,3 +3,78 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  margin: 5px; 
+  outline: none; 
+}
+.white {
+  background-color: whitesmoke
+}
+.purple {
+  background-color: purple
+}
+.black {
+  background-color: black
+}
+.blue {
+  background-color: blue
+}
+.green {
+  background-color: green
+}
+.orange {
+  background-color: orange
+}
+.red {
+  background-color: red
+}
+.yellow {
+  background-color: yellow
+}
+.currentcolour {
+ color: red; 
+ display: inline-block; 
+ height: 65%; 
+ vertical-align: top; 
+ margin: 5px;  
+border-radius: 10px;
+}
+.buttons, .new, .check{
+  display: inline-block;
+}
+.parameters {
+  height: 150px; 
+  width: 500px; 
+  border: 5px solid black;
+  margin: auto; 
+}
+.gamebtns button {
+  margin: 10px 8px 20px 8px; 
+}
+.gamebtns {
+  vertical-align: top; 
+  margin: 0px 0px 20px 0px; 
+}
+.colourbox{
+    color: white;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    padding: 12px; 
+    box-sizing: border-box; 
+}
+input:focus { 
+    background-color: none; 
+    outline: none; 
+}
+
+

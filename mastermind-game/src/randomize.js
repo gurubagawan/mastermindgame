@@ -4,6 +4,7 @@ import './App.css';
 
 class Randomize extends Component {
   render() {
+
     return (
       <div className="App">
         <div className="App-header">
