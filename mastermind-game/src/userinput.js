@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Randomize from './randomize'
-import Parameters from './parameters'
-import Userinput from './userinput'
 
-class App extends Component {
+class Userinput extends Component {
   render() {
     return (
       <div className="App">
@@ -21,4 +18,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Userinput;
