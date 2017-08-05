@@ -4,19 +4,18 @@ import './App.css';
 
 class Userinput extends Component {
   render() {
-for (let i=0; i<4; i++){
-<button className="btn white btn-circle"
-onClick={() => { this.props.setcolour(this.props.colour) }} />
-}
+    let board = this.props.board
+    const newBoard = board.map((specbtn, i) => {
+      return(
+      <button className= {this.props.board[i].colour ? this.props.board[i].colour : ''} onClick={() => { this.props.setcolour(1 , this.props.colour) }} > </button>
+    )} )
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Mastermind Game</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      //needs to update (remap) every input
+//       <div className={this.props.board[1].colour ? this.props.board[1].colour : ''}>
+// <button className= {this.props.board[1].colour ? this.props.board[1].colour : ''}
+// onClick={() => { this.props.setcolour(1 , this.props.colour) }} />
+      <div> 
+        {newBoard}
       </div>
     );
   }
