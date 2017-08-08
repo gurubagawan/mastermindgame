@@ -118,7 +118,6 @@ class App extends Component {
           //check to see for duplicate colours 
           //if (ignoreTrue < 0) {
           //check to see if both position and colour are right 
-          loop4:
           if (this.state.answer[k].colour == this.state.singleboard[j].colour &&
             this.state.answer[k].position == this.state.singleboard[j].position) {
             if (ignoreTrue < 0) {
@@ -133,18 +132,25 @@ class App extends Component {
             }
             break loop3
           }
-          // }
-          // //check again for ignore, but no disregarding position 
-          // if (ignoreTrue < 0) {
-          //check fjust for position 
-          else if (this.state.answer[k].colour === this.state.singleboard[j].colour) {
+        }
+        // }
+        // //check again for ignore, but no disregarding position 
+        // if (ignoreTrue < 0) {
+        //check fjust for position 
+        //two different loops, don't need a for loop within for loop for same position check
+        loop4:
+        for (let l = 0; l < 4; l++) {
+          let ignoreTrue = ignore.findIndex((num) => {
+            return num === l
+          })
+          if (this.state.answer[l].colour === this.state.singleboard[l].colour) {
             if (ignoreTrue < 0) {
               //return "yellow"
               console.log('yellow')
-              ignore.push(k)
-              break loop3;
+              ignore.push(l)
+              break loop4;
             }
-            break loop3;
+            break loop4;
           }
         }
       }
