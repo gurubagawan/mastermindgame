@@ -30,7 +30,7 @@ class Parameters extends Component {
                 <div className={box}>  <div className='colourbox' > Selected <br /> Colour </div> </div>
                 <div className='gamebtns'>
                     <button className="btn black check"
-                        onClick={() => { }} >Check</button>
+                        onClick={() => {this.props.compareAnswer()}} >Check</button>
                     <button className="btn black new"
                         onClick={() => {}} >Start New Game</button>
                 </div>
