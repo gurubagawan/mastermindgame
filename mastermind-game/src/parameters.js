@@ -32,7 +32,7 @@ class Parameters extends Component {
                     <button className="btn black check"
                         onClick={() => { }} >Check</button>
                     <button className="btn black new"
-                        onClick={() => { }} >Start New Game</button>
+                        onClick={() => {}} >Start New Game</button>
                 </div>
             </div>
         );

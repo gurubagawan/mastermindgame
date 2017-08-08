@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Randomize from './randomize'
-import Parameters from './parameters'
-import Userinput from './userinput'
+import Randomize from './randomize'; 
+import Parameters from './parameters'; 
+import Userinput from './userinput'; 
+
+// const initialstate = {
+//       gameWon: false, 
+//       singleboard: [
+//         {colour: undefined, position: 1},
+//         {colour: undefined, position: 2},
+//         {colour: undefined, position: 3},
+//         {colour: undefined, position: 4},
+//       ],
+//       //answer : this.randomarray(),
+//     }
+
 
 class App extends Component {
   constructor (){
@@ -15,10 +27,13 @@ class App extends Component {
         {colour: undefined, position: 2},
         {colour: undefined, position: 3},
         {colour: undefined, position: 4},
-      ]
+      ],
+      answer : this.randomarray(),
     }
     this.selectcolour= this.selectcolour.bind(this)
     this.setcolour= this.setcolour.bind(this)
+    this.switchloop = this.switchloop.bind(this)
+//this.cleareverthing = this.cleareverthing.bind(this)
   }
   // function for parameter block for user colour selection 
   selectcolour(newColour) {
@@ -26,53 +41,90 @@ class App extends Component {
         colour: newColour
     })
   }
+  // cleareverthing(){
+  //   this.setState ({
+  //     initialstate
+  //   })
+  // }
   // white=1, blue =2, green=3, purple=4, orange=5, red= 6, yellow=7, black=8 
   setcolour(inputpos, selectedcolour) {
+      console.log(this.state.singleboard)
     this.setState ({
       singleboard: this.state.singleboard.map((specbtn, i) =>{
         return (specbtn.position === inputpos ? {colour: selectedcolour, position: inputpos} : specbtn )
       } )
     })
+    console.log(this.state.singleboard)
   }
-  //    else if (this.state.colour == 'green'){
-  //     // className= 'green'
-  //     //compare class names instead of numbers?
-  //   }
-  //   else if (this.state.colour == 'blue'){
-  //     // className= 'blue'
-  //     //compare class names instead of numbers?
-  //   }
-  //   else if (this.state.colour == 'purple'){
-  //     // className= 'purple'
-  //     //compare class names instead of numbers?
-  //   }
-  //   else if (this.state.colour == 'orange'){
-  //     // {className= 'orange'}
-  //     //compare class names instead of numbers?
-  //   }
-  //   else if (this.state.colour == 'black'){
-  //     // className= 'black'
-  //     //compare class names instead of numbers?
-  //   }
-  // }
 
-  
-  // // checkgamewin(){
-  // // if () {
-  // this.setstate({
-  //   gameWon: true
-  // })
-  // }
-  // }
+  switchloop (){
+   switch (Math.floor(Math.random() * 8)){
+      case 0: 
+        return 'white'
+        break; 
+      case 1: 
+        return 'blue'
+        break; 
+      case 2: 
+        return 'green'
+        break;
+      case 3: 
+        return 'purple'
+        break;
+      case 4: 
+        return 'orange'
+        break;
+      case 5: 
+        return 'red'
+        break;
+      case 6: 
+        return 'yellow'
+        break;
+      case 7: 
+        return 'black'
+        break;
+  }}
+randomarray(){
+  var answer= []
+  for (let i=0; i<4; i++){
+      let thiscol= {colour: this.switchloop()}
+      answer.push({colour: thiscol, position: i+1})
+  }
+    console.log(answer)
+  return answer
+}
+
+compareAnswer(){
+  for(let i=0; i>4; i++){
+    for(let j=0; j>4; j++){
+      for(let k=0; k>4; k++){
+        if (this.state.answer[k].colour === this.state.singleboard[i][j].colour && this.state.answer[k].position === this.state.singleboard[i][j].position ){
+
+        }
+      }
+    }
+  }
+}
 
   render() {
-    //var col ='blue'
+      console.log(this.state.singleboard)
+    // const initialstate = {
+    //   gameWon: false, 
+    //   singleboard: [
+    //     {colour: undefined, position: 1},
+    //     {colour: undefined, position: 2},
+    //     {colour: undefined, position: 3},
+    //     {colour: undefined, position: 4},
+    //   ],
+    //   answer: this.randomarray()
+    // }
     return (
       <div className="App">
         <div className="App-header">
           <h2>Mastermind Game</h2>
-          <Userinput board={this.state.singleboard} setcolour={this.setcolour} colour= {this.state.colour}/> 
-          <Parameters colour={this.state.colour} selectcolour= {this.selectcolour}/> 
+          <Randomize /> 
+          <Userinput random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour= {this.state.colour}/> 
+          <Parameters colour={this.state.colour} selectcolour= {this.selectcolour} clear={this.cleareverthing} /> 
           </div> 
       </div>
     );

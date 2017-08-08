@@ -7,13 +7,10 @@ class Randomize extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Mastermind Game</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+       <button className ='btn btn-circle' disabled={true}/> 
+       <button className ='btn btn-circle' disabled={true}/> 
+       <button className ='btn btn-circle' disabled={true}/> 
+       <button className ='btn btn-circle' disabled={true}/> 
       </div>
     );
   }
