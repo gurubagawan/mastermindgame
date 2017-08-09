@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Randomize from './randomize';
 import Parameters from './parameters';
 import Userinput from './userinput';
+import Gameboard from './gameboard';
 
 // const initialstate = {
 //       gameWon: false, 
@@ -29,12 +29,14 @@ class App extends Component {
         { colour: undefined, position: 4 },
       ],
       answer: this.randomarray(),
+      currentrow: 7,
     }
     this.selectcolour = this.selectcolour.bind(this)
     this.setcolour = this.setcolour.bind(this)
     this.switchloop = this.switchloop.bind(this)
     this.compareAnswer = this.compareAnswer.bind(this)
     //this.cleareverthing = this.cleareverthing.bind(this)
+    this.checkGameComplete = this.checkGameComplete.bind(this)
   }
   // function for parameter block for user colour selection 
   selectcolour(newColour) {
@@ -61,29 +63,21 @@ class App extends Component {
   switchloop() {
     switch (Math.floor(Math.random() * 8)) {
       case 0:
-        return 'white'
-        break;
+        return 'white';
       case 1:
-        return 'blue'
-        break;
+        return 'blue';
       case 2:
-        return 'green'
-        break;
+        return 'green';
       case 3:
-        return 'purple'
-        break;
+        return 'purple';
       case 4:
-        return 'orange'
-        break;
+        return 'orange';
       case 5:
-        return 'red'
-        break;
+        return 'red';
       case 6:
-        return 'yellow'
-        break;
+        return 'yellow';
       case 7:
-        return 'black'
-        break;
+        return 'black';
     }
   }
   randomarray() {
@@ -92,68 +86,80 @@ class App extends Component {
       let thiscol = this.switchloop();
       answer.push({ colour: thiscol, position: i + 1 })
     }
-    console.log(answer)
+    //console.log(answer)
     return answer
   }
 
   compareAnswer() {
-    console.log('answer was compared')
+    //console.log('answer was compared')
+    var correct = 0;
+    var partial = 0;
     //going through specific arrays of arrays
     let ignore = []
-    loop1:
-    for (let i = 0; i < 4; i++) {
-      //console.log('firstloop')
-      // cycle through single array
-      loop2:
-      for (let j = 0; j < 4; j++) {
-        //console.log('second loop')
-        // cycling through the answer
-        loop3:
-        for (let k = 0; k < 4; k++) {
-          //console.log('third loop')
-          //push into array to ignore dupilicate colours 
-          let ignoreTrue = ignore.findIndex((num) => {
-            return num === k
-          })
-          //check to see for duplicate colours 
-          //if (ignoreTrue < 0) {
-          //check to see if both position and colour are right 
-          if (this.state.answer[k].colour == this.state.singleboard[j].colour &&
-            this.state.answer[k].position == this.state.singleboard[j].position) {
-            if (ignoreTrue < 0) {
-              //console.log('second if')
-              //green = right position right colour
-              //return "green"
-              console.log('green')
-              ignore.push(k)
-              console.log(ignore)
-              //break out of the loop when this true 
-              break loop3;
-            }
-            break loop3
-          }
-        }
-        // }
-        // //check again for ignore, but no disregarding position 
-        // if (ignoreTrue < 0) {
-        //check fjust for position 
-        //two different loops, don't need a for loop within for loop for same position check
-        loop4:
-        for (let l = 0; l < 4; l++) {
-          let ignoreTrue = ignore.findIndex((num) => {
-            return num === l
-          })
-          if (this.state.answer[l].colour === this.state.singleboard[l].colour) {
-            if (ignoreTrue < 0) {
-              //return "yellow"
-              console.log('yellow')
-              ignore.push(l)
-              break loop4;
-            }
-            break loop4;
-          }
+    //loop1:
+    // for (let i = 0; i < 4; i++) {
+    // cycle through single array
+    //look through submission at specific position and compare to answer at same position
+    for (let j = 0; j < 4; j++) {
+      //create a const to store whether or not this position is in the ignore array
+      let ignoreTrue = ignore.findIndex((num) => {
+        return num === j
+      })
+      //check to see if there is a match between both position and colour 
+      if (this.state.answer[j].colour === this.state.singleboard[j].colour) {
+        //has this position already been checked? if not (ignoreTrue will be 0 or greater) run this loop
+        if (ignoreTrue < 0) {
+          console.log('green')
+          ignore.push(j);
+          //store the amount of correct guesses in a variable, and increase this variable
+          correct++;
+          //console.log(correct)
         }
       }
+    }
+    //now we need two different loops to because we are checking if the colour is in there at all 
+    for (let z = 0; z < 4; z++) {
+      //console.log(z)
+      loop8: for (let l = 0; l < 4; l++) {
+        let ignoreTrue = ignore.findIndex((num) => {
+          return num === l
+        })
+        // console.log(this.state.answer[l].colour)
+        // console.log(this.state.singleboard[z].colour)
+        if (this.state.answer[l].colour === this.state.singleboard[z].colour) {
+          if (ignoreTrue < 0) {
+            //console.log(ignoreTrue)
+            //return "yellow"
+            console.log('yellow')
+            //console.log(ignore)
+            ignore.push(l);
+            //break loop8;
+            partial++;
+            break;
+          }
+          //console.log(ignore)
+        }
+      }
+    }
+    //}
+    this.checkGameComplete(correct);
+    this.feedback(correct, partial);
+    this.setState({
+      currentrow: --this.state.currentrow
+    })
+    console.log(this.state.currentrow)
+  };
+
+  feedback(correct, partial) {
+    console.log('something')
+  }
+
+
+  checkGameComplete(correct) {
+    if (correct === 4) {
+      this.setState({
+        gameWon: true
+      })
     }
   }
 
@@ -169,12 +175,14 @@ class App extends Component {
     //   ],
     //   answer: this.randomarray()
     // }
+    //console.log(this.state.singleboard)
     return (
       <div className="App">
         <div className="App-header">
           <h2>Mastermind Game</h2>
-          <Randomize />
-          <Userinput random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
+          {/* <Randomize /> */}
+          {/* <Gameboard currentrow={this.state.currentrow} /> */}
+           <Userinput currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} /> 
           <Parameters colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
         </div>
       </div>
