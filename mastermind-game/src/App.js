@@ -81,18 +81,15 @@ class App extends Component {
   setcolour(row, coloumn, selectedcolour) {
     //console.log(this.state.singleboard)
     this.setState({
-      singleboard: this.state.singleboard.map ((specrow,i) => {
-        let y = specrow.map((specbtn,j) => { 
-        return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
-        })
-      return ({y})
+      singleboard: this.state.singleboard.map((specrow, i) => {
+        if (i === this.state.currentrow) {
+          return (specrow.map((specbtn, j) => {
+            console.log(row, coloumn)
+            return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
+          }))
+        }
+        else return (specrow)
       })
-      // singleboard: this.state.singleboard.map((specrow, i) => {
-      //   return (specrow.map(specbtn => { 
-      //     console.log (specbtn)
-      //   return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
-      // }))
-      // })
     })
     //console.log(this.state.singleboard)
   }
@@ -219,7 +216,7 @@ class App extends Component {
           <h2>Mastermind Game</h2>
           {/* <Randomize /> */}
           {/* <Gameboard currentrow={this.state.currentrow} /> */}
-           <Userinput currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} /> 
+          <Userinput currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
           <Parameters colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
         </div>
       </div>
