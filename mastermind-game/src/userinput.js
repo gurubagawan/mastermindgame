@@ -12,7 +12,7 @@ class Userinput extends Component {
     var newBoard =
       template.map((singarr, i) => {
         let x = singarr.map((button,j) => { 
-        return (<button key={j} className={`btn btn-circle ${this.props.board[i][j].colour ? this.props.board[i][j].colour : ''}`} onClick={() => { this.props.setcolour((i + 1), this.props.colour) }} > </button>)
+        return (<button key={j} className={`btn btn-circle ${this.props.board[i][j].colour ? this.props.board[i][j].colour : ''}`} onClick={() => { this.props.setcolour(i ,(j + 1), this.props.colour) }} > </button>)
         })
       return (<div key={i} > {x} </div>)
       })
@@ -57,6 +57,7 @@ class Userinput extends Component {
 //     //  }) 
 //     //}
 //     console.log(smallBoard)
+console.log(newBoard)
     return (
 
       //needs to update (remap) every input

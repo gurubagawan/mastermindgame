@@ -78,12 +78,21 @@ class App extends Component {
   //   })
   // }
   // white=1, blue =2, green=3, purple=4, orange=5, red= 6, yellow=7, black=8 
-  setcolour(inputpos, selectedcolour) {
+  setcolour(row, coloumn, selectedcolour) {
     //console.log(this.state.singleboard)
     this.setState({
-      singleboard: this.state.singleboard.map((specbtn, i) => {
-        return (specbtn.position === inputpos ? { colour: selectedcolour, position: inputpos } : specbtn)
+      singleboard: this.state.singleboard.map ((specrow,i) => {
+        let y = specrow.map((specbtn,j) => { 
+        return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
+        })
+      return ({y})
       })
+      // singleboard: this.state.singleboard.map((specrow, i) => {
+      //   return (specrow.map(specbtn => { 
+      //     console.log (specbtn)
+      //   return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
+      // }))
+      // })
     })
     //console.log(this.state.singleboard)
   }
