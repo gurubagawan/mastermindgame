@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 //8 Coloured circles 
-class Parameters extends Component {
+class Controls extends Component {
     render() {
         let box = `currentcolour ${this.props.colour}`;
         return (
@@ -30,12 +30,12 @@ class Parameters extends Component {
                 <div className='gamebtns'>
                     <button className="btn black check"
                         onClick={() => {this.props.compareAnswer()}} >Check</button>
-                    <button className="btn black new"
-                        onClick={() => {}} >Start New Game</button>
+                    {/* <button className="btn black new"
+                        onClick={() => {this.props.reload}} >Start New Game</button> */}
                 </div>
             </div>
         );
     }
 }
 
-export default Parameters;
+export default Controls;

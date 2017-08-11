@@ -2,7 +2,14 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: grey; 
 }
+.alert {
+  background-color: black; 
+}
+/* .App{
+  height: 700 px; 
+} */
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -50,17 +57,18 @@ border-radius: 10px;
   display: inline-block;
 }
 .parameters {
-  height: 150px; 
-  width: 500px; 
-  border: 5px solid black;
+  height: 130px; 
+  width: 100%; 
+  /* border: 5px solid black; */
   margin: auto; 
 }
 .gamebtns button {
   margin: 10px 8px 20px 8px; 
+  color: white; 
 }
 .gamebtns {
   vertical-align: top; 
-  margin: 0px 0px 20px 0px; 
+  /* margin: 0px 0px 20px 0px;  */
 }
 .colourbox{
     color: white;
@@ -111,4 +119,24 @@ input:focus {
 }
 .twoSmallButtons {
   vertical-align: middle;
+}
+#root{
+  border: 5px solid black;
+  display: block;
+  width: 300px; 
+  margin: auto; 
+  background-color: #c4921d;
+}
+.image{
+  height: 50px; 
+  width: 50px; 
+}
+.new {
+  color: white; 
+  margin-top: 10px;
+}
+
+.check{
+  font-size: 150%;
+  margin-bottom:20px;
 }

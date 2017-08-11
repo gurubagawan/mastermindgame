@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Randomize from './randomize';
-import Parameters from './parameters';
-import Userinput from './userinput';
-import Gameboard from './gameboard';
+import Controls from './controls';
+import Board from './board';
+//import Gameboard from './gameboard';
 
 // const initialstate = {
 //       gameWon: false, 
@@ -21,6 +21,35 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+
+    }
+    this.selectcolour = this.selectcolour.bind(this)
+    this.setcolour = this.setcolour.bind(this)
+    this.switchloop = this.switchloop.bind(this)
+    this.compareAnswer = this.compareAnswer.bind(this)
+    //this.cleareverthing = this.cleareverthing.bind(this)
+    this.checkGameComplete = this.checkGameComplete.bind(this)
+    this.gameInit = this.gameInit.bind(this)
+  }
+
+  componentWillMount() {
+    this.gameInit();
+  }
+  componentDidUpdate() {
+    if (this.state.currentrow=== -1 && this.state.gameWon==false) {
+      alert ('We took the time to code this game, but you were not smart enough to beat it.... :(...tell your mom she failed you')
+    }
+  }
+
+  gameInit() {
+    var  tempanswer = []
+    for (let i = 0; i < 4; i++) {
+      let thiscol = this.switchloop();
+      tempanswer.push({ colour: thiscol, position: i + 1 })
+    }
+    //console.log(answer)
+    //return answer
+    this.setState({
       gameWon: false,
       singleboard: [
         [{ colour: undefined, position: 1 },
@@ -56,15 +85,16 @@ class App extends Component {
         { colour: undefined, position: 3 },
         { colour: undefined, position: 4 }],
       ],
-      answer: this.randomarray(),
+       answer: tempanswer, 
       currentrow: 7,
-    }
-    this.selectcolour = this.selectcolour.bind(this)
-    this.setcolour = this.setcolour.bind(this)
-    this.switchloop = this.switchloop.bind(this)
-    this.compareAnswer = this.compareAnswer.bind(this)
-    //this.cleareverthing = this.cleareverthing.bind(this)
-    this.checkGameComplete = this.checkGameComplete.bind(this)
+    })
+    // var answer = []
+    // for (let i = 0; i < 4; i++) {
+    //   let thiscol = this.switchloop();
+    //   answer.push({ colour: thiscol, position: i + 1 })
+    // }
+    console.log(tempanswer)
+    //return answer
   }
   // function for parameter block for user colour selection 
   selectcolour(newColour) {
@@ -112,15 +142,15 @@ class App extends Component {
     }
   }
   //uses the previous function 4 times, and stores them in an array to compare against 
-  randomarray() {
-    var answer = []
-    for (let i = 0; i < 4; i++) {
-      let thiscol = this.switchloop();
-      answer.push({ colour: thiscol, position: i + 1 })
-    }
-    console.log(answer)
-    return answer
-  }
+  // randomarray() {
+  //   var answer = []
+  //   for (let i = 0; i < 4; i++) {
+  //     let thiscol = this.switchloop();
+  //     answer.push({ colour: thiscol, position: i + 1 })
+  //   }
+  //   console.log(answer)
+  //   return answer
+  // }
 
   compareAnswer() {
     //console.log('answer was compared')
@@ -165,33 +195,34 @@ class App extends Component {
         }
       }
     }
-    //}
+    // //}
+    // this.feedback(correct, partial);
+    this.printResults(correct, partial);
     this.checkGameComplete(correct);
-    this.feedback(correct, partial);
-    this.printResults(correct,partial); 
-    
+
+    if (this.state.currentrow > -1) {
     this.setState({
       currentrow: --this.state.currentrow
     })
-    console.log (this.state.singleboard); 
-    
+    }
   };
 
-printResults(correct, partial){
-  for(let i=0; i<correct; i++){
-    var x= document.getElementById(`${i+1}-${this.state.currentrow}`)
-    console.log(x)
-    x.className = "btn btn-xs green"; 
+  printResults(correct, partial) {
+    for (let i = 0; i < correct; i++) {
+      var x = document.getElementById(`${i + 1}-${this.state.currentrow}`)
+      console.log(x)
+      x.className = "btn btn-xs green";
+    }
+    for (let i = correct; i < (partial + correct); i++) {
+      var y = document.getElementById(`${i + 1}-${this.state.currentrow}`)
+      console.log(y)
+      y.className = "btn btn-xs yellow";
+    }
   }
-  for(let i=correct; i<(partial+correct); i++){
-    var y= document.getElementById(`${i+1}-${this.state.currentrow}`)
-    console.log(y)
-    y.className = "btn btn-xs yellow"; 
-}}
 
-  feedback(correct, partial) {
-    console.log('something')
-  }
+  // feedback(correct, partial) {
+  //   console.log('something')
+  // }
 
 
   checkGameComplete(correct) {
@@ -199,18 +230,23 @@ printResults(correct, partial){
       this.setState({
         gameWon: true
       })
-      alert("You won!")
+      alert("Fuck ya you won!")
     }
   }
+
+  // reloadGame() {
+  //   window.location.reload(); 
+  // }
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+        <div>
           <h2>Mastermind Game</h2>
-           <Randomize /> 
-          {/* <Gameboard currentrow={this.state.currentrow} /> */}
-          <Userinput currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
-          <Parameters colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
+          <Randomize />
+          <Board currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
+          <Controls reload={this.gameInit} colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
+          <br/>
+          <button className='btn black new gamebtns'  onClick={this.gameInit}> Start New Game</button>
         </div>
       </div>
     );

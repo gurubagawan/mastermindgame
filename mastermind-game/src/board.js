@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 
-class Userinput extends Component {
+class Board extends Component {
   render() {
     let template = this.props.board
     var newBoard =
@@ -26,48 +26,6 @@ class Userinput extends Component {
           </div>
         )
       })
-
-    // var newBoard = 
-    // smallBoard.map((specbtn, j)=> {
-    //    return (smallBoard key={j})
-    // })
-    //ar template = 
-    //guess.map ((dot,i) => {
-
-    // } )
-
-    //  var template =
-    //     board.map((guess, i) => {
-    //       "<div>"
-    //         guess.map((dot, j)=>{
-    //           return (<button key={i} className={`btn btn-circle ${this.props.board[i].colour ? this.props.board[i].colour : ''}`} onClick={() => { this.props.setcolour((i + 1), this.props.colour) }} > </button>)
-    //         }
-    //         "</div>"
-
-
-
-    //     })
-
-    // var newBoard = 
-    // smallBoard.map((specbtn, j)=> {
-    //    return (smallBoard key={j})
-    // })
-    // var template = 
-    // guess.map ((dot,i) => {
-
-    // } )
-    //     for(let i=0; i<8; i++) {
-    //       newBoard.push(smallBoard)
-    //     }
-    //     //       var smallbrd = 
-    //     //       specarr.map ((obj, j) => {
-    //     //       return(
-    //     //       <button key={j} className= {`btn btn-circle ${this.props.board[i][j].colour ? this.props.board[i][j].colour : ''}`} onClick={() => { this.props.setcolour((i+1) , this.props.colour) }} > </button>
-    //     //  )
-    //     //  }) 
-    //     //}
-    //     console.log(smallBoard)
-    //console.log(newBoard)
     return (
 
       //needs to update (remap) every input
@@ -81,4 +39,4 @@ class Userinput extends Component {
   }
 }
 
-export default Userinput;
+export default Board;
