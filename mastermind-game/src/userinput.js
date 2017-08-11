@@ -5,10 +5,6 @@ import './App.css';
 class Userinput extends Component {
   render() {
     let template = this.props.board
-    //let changingclass = `btn btn-circle ${this.props.board[i].colour ? this.props.board[i].colour : ''}`;
-    //use Push loop to create multiple rows for use input somehow. 
-    //for (let z=0; z<8; z++) {
-    //var newBoard = []
     var newBoard =
       template.map((singarr, i) => {
         let x = singarr.map((button, j) => {

@@ -77,9 +77,7 @@ class App extends Component {
   //     initialstate
   //   })
   // }
-  // white=1, blue =2, green=3, purple=4, orange=5, red= 6, yellow=7, black=8 
   setcolour(row, column, selectedcolour) {
-    //console.log(this.state.singleboard)
     this.setState({
       singleboard: this.state.singleboard.map((specrow, i) => {
         if (i === this.state.currentrow) {
@@ -90,7 +88,6 @@ class App extends Component {
         else return (specrow)
       })
     })
-    //console.log(this.state.singleboard)
   }
 
   //Generates a random number between 0 -> 7, and assigns a colour based on those numbers
@@ -133,10 +130,6 @@ class App extends Component {
     let ignore = []
     var submission = this.state.singleboard[this.state.currentrow]
 
-    //loop1:
-    // for (let i = 0; i < 4; i++) {
-    // cycle through single array
-    //look through submission at specific position and compare to answer at same position
     for (let j = 0; j < 4; j++) {
       //create a const to store whether or not this position is in the ignore array
       let ignoreTrue = ignore.findIndex((num) => {
@@ -161,20 +154,14 @@ class App extends Component {
         let ignoreTrue = ignore.findIndex((num) => {
           return num === l
         })
-        // console.log(this.state.answer[l].colour)
-        // console.log(this.state.singleboard[z].colour)
         if (this.state.answer[l].colour === submission[z].colour) {
           if (ignoreTrue < 0) {
-            //console.log(ignoreTrue)
-            //return "yellow"
             console.log('yellow')
-            //console.log(ignore)
             ignore.push(l);
             //break loop8;
             partial++;
             break;
           }
-          //console.log(ignore)
         }
       }
     }
@@ -216,18 +203,6 @@ printResults(correct, partial){
     }
   }
   render() {
-    // console.log(this.state.singleboard)
-    // const initialstate = {
-    //   gameWon: false, 
-    //   singleboard: [
-    //     {colour: undefined, position: 1},
-    //     {colour: undefined, position: 2},
-    //     {colour: undefined, position: 3},
-    //     {colour: undefined, position: 4},
-    //   ],
-    //   answer: this.randomarray()
-    // }
-    //console.log(this.state.singleboard)
     return (
       <div className="App">
         <div className="App-header">
