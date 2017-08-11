@@ -6,10 +6,10 @@ class Randomize extends Component {
 
     return (
       <div className="App">
-       <button className ='btn btn-circle' disabled={true}/> 
-       <button className ='btn btn-circle' disabled={true}/> 
-       <button className ='btn btn-circle' disabled={true}/> 
-       <button className ='btn btn-circle' disabled={true}/> 
+       <button className ='btn btn-circle unknown' disabled={true}>?</button>  
+       <button className ='btn btn-circle unknown' disabled={true}>?</button> 
+       <button className ='btn btn-circle unknown' disabled={true}>?</button> 
+       <button className ='btn btn-circle unknown' disabled={true}>?</button> 
       </div>
     );
   }

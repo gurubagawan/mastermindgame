@@ -77,4 +77,38 @@ input:focus {
     outline: none; 
 }
 
+.unknown {
+  font-weight: bold; 
+  color: black; 
+  font-size: 12px;  
+  vertical-align: text-top
+}
 
+/* .btn-xs {
+  width: 25%;
+  height: 25%;
+} */
+
+.btn-xs{
+  width: 10px;
+  height: 10px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 5px;
+  margin: 5px; 
+  outline: none; 
+  display: inline-block;
+}
+
+.fourButtons{
+  display: inline-block;
+  margin-top: auto; 
+  margin-bottom: auto; 
+}
+.fourSmallButtons {
+  display: inline-block; 
+}
+.twoSmallButtons {
+  vertical-align: middle;
+}

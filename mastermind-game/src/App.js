@@ -78,14 +78,13 @@ class App extends Component {
   //   })
   // }
   // white=1, blue =2, green=3, purple=4, orange=5, red= 6, yellow=7, black=8 
-  setcolour(row, coloumn, selectedcolour) {
+  setcolour(row, column, selectedcolour) {
     //console.log(this.state.singleboard)
     this.setState({
       singleboard: this.state.singleboard.map((specrow, i) => {
         if (i === this.state.currentrow) {
           return (specrow.map((specbtn, j) => {
-            console.log(row, coloumn)
-            return (specbtn.position === coloumn ? { colour: selectedcolour, position: coloumn } : specbtn)
+            return (specbtn.position === column ? { colour: selectedcolour, position: column } : specbtn)
           }))
         }
         else return (specrow)
@@ -94,6 +93,7 @@ class App extends Component {
     //console.log(this.state.singleboard)
   }
 
+  //Generates a random number between 0 -> 7, and assigns a colour based on those numbers
   switchloop() {
     switch (Math.floor(Math.random() * 8)) {
       case 0:
@@ -114,13 +114,14 @@ class App extends Component {
         return 'black';
     }
   }
+  //uses the previous function 4 times, and stores them in an array to compare against 
   randomarray() {
     var answer = []
     for (let i = 0; i < 4; i++) {
       let thiscol = this.switchloop();
       answer.push({ colour: thiscol, position: i + 1 })
     }
-    //console.log(answer)
+    console.log(answer)
     return answer
   }
 
@@ -130,6 +131,8 @@ class App extends Component {
     var partial = 0;
     //going through specific arrays of arrays
     let ignore = []
+    var submission = this.state.singleboard[this.state.currentrow]
+
     //loop1:
     // for (let i = 0; i < 4; i++) {
     // cycle through single array
@@ -140,14 +143,14 @@ class App extends Component {
         return num === j
       })
       //check to see if there is a match between both position and colour 
-      if (this.state.answer[j].colour === this.state.singleboard[j].colour) {
+      if (this.state.answer[j].colour === submission[j].colour) {
         //has this position already been checked? if not (ignoreTrue will be 0 or greater) run this loop
         if (ignoreTrue < 0) {
           console.log('green')
           ignore.push(j);
           //store the amount of correct guesses in a variable, and increase this variable
           correct++;
-          //console.log(correct)
+          console.log(correct)
         }
       }
     }
@@ -160,7 +163,7 @@ class App extends Component {
         })
         // console.log(this.state.answer[l].colour)
         // console.log(this.state.singleboard[z].colour)
-        if (this.state.answer[l].colour === this.state.singleboard[z].colour) {
+        if (this.state.answer[l].colour === submission[z].colour) {
           if (ignoreTrue < 0) {
             //console.log(ignoreTrue)
             //return "yellow"
@@ -178,11 +181,26 @@ class App extends Component {
     //}
     this.checkGameComplete(correct);
     this.feedback(correct, partial);
+    this.printResults(correct,partial); 
+    
     this.setState({
       currentrow: --this.state.currentrow
     })
-    console.log(this.state.currentrow)
+    console.log (this.state.singleboard); 
+    
   };
+
+printResults(correct, partial){
+  for(let i=0; i<correct; i++){
+    var x= document.getElementById(`${i+1}-${this.state.currentrow}`)
+    console.log(x)
+    x.className = "btn btn-xs green"; 
+  }
+  for(let i=correct; i<(partial+correct); i++){
+    var y= document.getElementById(`${i+1}-${this.state.currentrow}`)
+    console.log(y)
+    y.className = "btn btn-xs yellow"; 
+}}
 
   feedback(correct, partial) {
     console.log('something')
@@ -194,11 +212,11 @@ class App extends Component {
       this.setState({
         gameWon: true
       })
+      alert("You won!")
     }
   }
-
   render() {
-    //console.log(this.state.singleboard)
+    // console.log(this.state.singleboard)
     // const initialstate = {
     //   gameWon: false, 
     //   singleboard: [
@@ -214,7 +232,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Mastermind Game</h2>
-          {/* <Randomize /> */}
+           <Randomize /> 
           {/* <Gameboard currentrow={this.state.currentrow} /> */}
           <Userinput currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
           <Parameters colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
