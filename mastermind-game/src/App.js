@@ -3,19 +3,6 @@ import './App.css';
 import Randomize from './randomize';
 import Controls from './controls';
 import Board from './board';
-//import Gameboard from './gameboard';
-
-// const initialstate = {
-//       gameWon: false, 
-//       singleboard: [
-//         {colour: undefined, position: 1},
-//         {colour: undefined, position: 2},
-//         {colour: undefined, position: 3},
-//         {colour: undefined, position: 4},
-//       ],
-//       //answer : this.randomarray(),
-//     }
-
 
 class App extends Component {
   constructor() {
@@ -27,7 +14,6 @@ class App extends Component {
     this.setcolour = this.setcolour.bind(this)
     this.switchloop = this.switchloop.bind(this)
     this.compareAnswer = this.compareAnswer.bind(this)
-    //this.cleareverthing = this.cleareverthing.bind(this)
     this.checkGameComplete = this.checkGameComplete.bind(this)
     this.gameInit = this.gameInit.bind(this)
   }
@@ -48,7 +34,6 @@ class App extends Component {
       tempanswer.push({ colour: thiscol, position: i + 1 })
     }
     //console.log(answer)
-    //return answer
     this.setState({
       gameWon: false,
       singleboard: [
@@ -85,28 +70,20 @@ class App extends Component {
         { colour: undefined, position: 3 },
         { colour: undefined, position: 4 }],
       ],
-       answer: tempanswer, 
+       answer: tempanswer,
       currentrow: 7,
     })
-    // var answer = []
-    // for (let i = 0; i < 4; i++) {
-    //   let thiscol = this.switchloop();
-    //   answer.push({ colour: thiscol, position: i + 1 })
-    // }
+
     console.log(tempanswer)
     //return answer
   }
-  // function for parameter block for user colour selection 
+  // function for parameter block for user colour selection
   selectcolour(newColour) {
     this.setState({
       colour: newColour
     })
   }
-  // cleareverthing(){
-  //   this.setState ({
-  //     initialstate
-  //   })
-  // }
+
   setcolour(row, column, selectedcolour) {
     this.setState({
       singleboard: this.state.singleboard.map((specrow, i) => {
@@ -141,16 +118,6 @@ class App extends Component {
         return 'black';
     }
   }
-  //uses the previous function 4 times, and stores them in an array to compare against 
-  // randomarray() {
-  //   var answer = []
-  //   for (let i = 0; i < 4; i++) {
-  //     let thiscol = this.switchloop();
-  //     answer.push({ colour: thiscol, position: i + 1 })
-  //   }
-  //   console.log(answer)
-  //   return answer
-  // }
 
   compareAnswer() {
     //console.log('answer was compared')
@@ -165,7 +132,7 @@ class App extends Component {
       let ignoreTrue = ignore.findIndex((num) => {
         return num === j
       })
-      //check to see if there is a match between both position and colour 
+      //check to see if there is a match between both position and colour
       if (this.state.answer[j].colour === submission[j].colour) {
         //has this position already been checked? if not (ignoreTrue will be 0 or greater) run this loop
         if (ignoreTrue < 0) {
@@ -177,7 +144,7 @@ class App extends Component {
         }
       }
     }
-    //now we need two different loops to because we are checking if the colour is in there at all 
+    //now we need two different loops to because we are checking if the colour is in there at all
     for (let z = 0; z < 4; z++) {
       //console.log(z)
       loop8: for (let l = 0; l < 4; l++) {
@@ -188,15 +155,12 @@ class App extends Component {
           if (ignoreTrue < 0) {
             console.log('yellow')
             ignore.push(l);
-            //break loop8;
             partial++;
             break;
           }
         }
       }
     }
-    // //}
-    // this.feedback(correct, partial);
     this.printResults(correct, partial);
     this.checkGameComplete(correct);
 
@@ -220,23 +184,15 @@ class App extends Component {
     }
   }
 
-  // feedback(correct, partial) {
-  //   console.log('something')
-  // }
-
-
   checkGameComplete(correct) {
     if (correct === 4) {
       this.setState({
         gameWon: true
       })
-      alert("Fuck ya you won!")
+      alert("Heck ya you won!")
     }
   }
 
-  // reloadGame() {
-  //   window.location.reload(); 
-  // }
   render() {
     return (
       <div className="App">
@@ -244,7 +200,7 @@ class App extends Component {
           <h2>Mastermind Game</h2>
           <Randomize />
           <Board currentrow={this.state.currentrow} random={this.randomcolour} board={this.state.singleboard} setcolour={this.setcolour} colour={this.state.colour} />
-          <Controls reload={this.gameInit} colour={this.state.colour} selectcolour={this.selectcolour} clear={this.cleareverthing} compareAnswer={this.compareAnswer} />
+          <Controls reload={this.gameInit} colour={this.state.colour} selectcolour={this.selectcolour} compareAnswer={this.compareAnswer} />
           <br/>
           <button className='btn black new gamebtns'  onClick={this.gameInit}> Start New Game</button>
         </div>

@@ -27,11 +27,6 @@ class Board extends Component {
         )
       })
     return (
-
-      //needs to update (remap) every input
-      //       <div className={this.props.board[1].colour ? this.props.board[1].colour : ''}>
-      // <button className= {this.props.board[1].colour ? this.props.board[1].colour : ''}
-      // onClick={() => { this.props.setcolour(1 , this.props.colour) }} />
       <div>
         {newBoard}
       </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//8 Coloured circles 
+//8 Coloured circles
 class Controls extends Component {
     render() {
         let box = `currentcolour ${this.props.colour}`;
@@ -30,8 +30,6 @@ class Controls extends Component {
                 <div className='gamebtns'>
                     <button className="btn black check"
                         onClick={() => {this.props.compareAnswer()}} >Check</button>
-                    {/* <button className="btn black new"
-                        onClick={() => {this.props.reload}} >Start New Game</button> */}
                 </div>
             </div>
         );
