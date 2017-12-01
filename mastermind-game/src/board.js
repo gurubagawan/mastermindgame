@@ -25,7 +25,7 @@ class Board extends Component {
             </div>
           </div>
         )
-      })
+      });
     return (
       <div>
         {newBoard}

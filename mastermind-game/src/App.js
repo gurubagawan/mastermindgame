@@ -16,16 +16,17 @@ class App extends Component {
     this.compareAnswer = this.compareAnswer.bind(this)
     this.checkGameComplete = this.checkGameComplete.bind(this)
     this.gameInit = this.gameInit.bind(this)
-  }
+  };
 
   componentWillMount() {
     this.gameInit();
-  }
+  };
+
   componentDidUpdate() {
-    if (this.state.currentrow=== -1 && this.state.gameWon==false) {
+    if (this.state.currentrow === -1 && this.state.gameWon === false) {
       alert ('We took the time to code this game, but you were not smart enough to beat it.... :(...tell your mom she failed you')
-    }
-  }
+    };
+  };
 
   gameInit() {
     var  tempanswer = []
@@ -76,13 +77,14 @@ class App extends Component {
 
     console.log(tempanswer)
     //return answer
-  }
+  };
+
   // function for parameter block for user colour selection
   selectcolour(newColour) {
     this.setState({
       colour: newColour
     })
-  }
+  };
 
   setcolour(row, column, selectedcolour) {
     this.setState({
@@ -95,7 +97,7 @@ class App extends Component {
         else return (specrow)
       })
     })
-  }
+  };
 
   //Generates a random number between 0 -> 7, and assigns a colour based on those numbers
   switchloop() {
@@ -116,8 +118,8 @@ class App extends Component {
         return 'yellow';
       case 7:
         return 'black';
-    }
-  }
+    };
+  };
 
   compareAnswer() {
     //console.log('answer was compared')
@@ -143,11 +145,11 @@ class App extends Component {
           console.log(correct)
         }
       }
-    }
+    };
     //now we need two different loops to because we are checking if the colour is in there at all
     for (let z = 0; z < 4; z++) {
       //console.log(z)
-      loop8: for (let l = 0; l < 4; l++) {
+      for (let l = 0; l < 4; l++) {
         let ignoreTrue = ignore.findIndex((num) => {
           return num === l
         })
@@ -160,7 +162,7 @@ class App extends Component {
           }
         }
       }
-    }
+    };
     this.printResults(correct, partial);
     this.checkGameComplete(correct);
 
@@ -168,7 +170,7 @@ class App extends Component {
     this.setState({
       currentrow: --this.state.currentrow
     })
-    }
+  };
   };
 
   printResults(correct, partial) {
@@ -176,13 +178,13 @@ class App extends Component {
       var x = document.getElementById(`${i + 1}-${this.state.currentrow}`)
       console.log(x)
       x.className = "btn btn-xs green";
-    }
+    };
     for (let i = correct; i < (partial + correct); i++) {
       var y = document.getElementById(`${i + 1}-${this.state.currentrow}`)
       console.log(y)
       y.className = "btn btn-xs yellow";
-    }
-  }
+    };
+  };
 
   checkGameComplete(correct) {
     if (correct === 4) {
@@ -190,8 +192,8 @@ class App extends Component {
         gameWon: true
       })
       alert("Heck ya you won!")
-    }
-  }
+    };
+  };
 
   render() {
     return (
