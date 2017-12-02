@@ -138,11 +138,11 @@ class App extends Component {
       if (this.state.answer[j].colour === submission[j].colour) {
         //has this position already been checked? if not (ignoreTrue will be 0 or greater) run this loop
         if (ignoreTrue < 0) {
-          console.log('green')
+          // console.log('green')
           ignore.push(j);
           //store the amount of correct guesses in a variable, and increase this variable
           correct++;
-          console.log(correct)
+          // console.log(correct)
         }
       }
     };
@@ -155,7 +155,7 @@ class App extends Component {
         })
         if (this.state.answer[l].colour === submission[z].colour) {
           if (ignoreTrue < 0) {
-            console.log('yellow')
+            // console.log('yellow')
             ignore.push(l);
             partial++;
             break;
@@ -176,12 +176,12 @@ class App extends Component {
   printResults(correct, partial) {
     for (let i = 0; i < correct; i++) {
       var x = document.getElementById(`${i + 1}-${this.state.currentrow}`)
-      console.log(x)
+      // console.log(x)
       x.className = "btn btn-xs green";
     };
     for (let i = correct; i < (partial + correct); i++) {
       var y = document.getElementById(`${i + 1}-${this.state.currentrow}`)
-      console.log(y)
+      // console.log(y)
       y.className = "btn btn-xs yellow";
     };
   };
